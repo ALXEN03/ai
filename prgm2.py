@@ -1,5 +1,3 @@
-from collections import deque
-
 g = {
     'A':['B','C'],
     'B':['D','E'],
@@ -9,14 +7,15 @@ g = {
     'F':[]
 }
 
-def bfs(s):
-    q=deque([s])
-    vis=set()
+def bfs(v):
+    vis = set()
+    q = [v]
+
     while q:
-        v=q.popleft()
-        if v not in vis:
-            print(v,end=' ')
-            vis.add(v)
-            q.extend(g[v])
+        x = q.pop(0)
+        if x not in vis:
+            print(x,end=' ')
+            vis.add(x)
+            q.extend(g[x])
 
 bfs('A')

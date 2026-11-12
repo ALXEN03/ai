@@ -10,25 +10,25 @@ g = {
     'G':{}
 }
 
-h = {
-    'A':6,
-    'B':4,
-    'C':4,
-    'D':3,
-    'E':2,
-    'H':1,
-    'G':0
-}
+h = {'A':6,'B':4,'C':4,'D':3,'E':2,'H':1,'G':0}
 
-q=[(h['A'],0,'A',['A'])]
+def astar(start,goal):
+    q = [(h[start],start,0,[start])]
+    vis = set()
 
-while q:
-    f,c,v,p=heapq.heappop(q)
+    while q:
+        f,v,cost,path = heapq.heappop(q)
 
-    if v=='G':
-        print("Path :",p)
-        print("Cost :",c)
-        break
+        if v == goal:
+            return path,cost
 
-    for x,w in g[v].items():
-        heapq.heappush(q,(c+w+h[x],c+w,x,p+[x]))
+        if v not in vis:
+            vis.add(v)
+            for n,w in g[v].items():
+                if n not in vis:
+                    new = cost + w
+                    heapq.heappush(q,(new+h[n],n,new,path+[n]))
+
+path,cost = astar('A','G')
+print("Path:",path)
+print("Cost:",cost)

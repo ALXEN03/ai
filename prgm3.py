@@ -10,31 +10,23 @@ g = {
     'G':[]
 }
 
-h = {
-    'A':5,
-    'B':3,
-    'C':2,
-    'D':6,
-    'E':1,
-    'F':0,
-    'G':4
-}
+h = {'A':5,'B':3,'C':2,'D':6,'E':1,'F':0,'G':4}
 
-def best(s,goal):
-    q=[(h[s],s)]
-    vis=set()
+def best(v,goal):
+    vis = set()
+    q = [(h[v],v)]
 
     while q:
-        _,v=heapq.heappop(q)
-        print(v,end=' ')
+        _,x = heapq.heappop(q)
+        print("Visiting:",x)
 
-        if v==goal:
-            print('\nGoal reached!')
+        if x == goal:
+            print("Goal reached!")
             return
 
-        if v not in vis:
-            vis.add(v)
-            for x in g[v]:
-                heapq.heappush(q,(h[x],x))
+        if x not in vis:
+            vis.add(x)
+            for n in g[x]:
+                heapq.heappush(q,(h[n],n))
 
 best('A','F')
